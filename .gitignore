@@ -1,13 +1,12 @@
-_build
-_tracks
+# Bỏ qua thư mục node_modules và build trong React
+frontend/node_modules/
+frontend/build/
 
-opa-debug-js
+# Bỏ qua thư mục target và logs trong Spring Boot
+backend/target/
+backend/logs/
 
-*.opp
-*.opx
-*.opx.broken
-*.dump
-*.api
-*.api-txt
-*.exe
-*.log
+# Bỏ qua các file hệ thống không cần thiết
+.DS_Store
+.idea/
+*.iml
