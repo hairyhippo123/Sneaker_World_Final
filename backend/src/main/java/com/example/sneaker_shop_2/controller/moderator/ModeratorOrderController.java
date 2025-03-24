@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/moderator/order")
+@RequestMapping("/api/moderator/orders")
 public class ModeratorOrderController {
     @Autowired
     private OrderRepository orderRepository;

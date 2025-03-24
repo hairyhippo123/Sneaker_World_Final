@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -24,23 +25,23 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/admin/**").hasRole("ADMIN") // Chỉ admin truy cập các API /api/admin/**
-                        .requestMatchers("/api/moderator/**").hasRole("MODERATOR") // Chỉ moderator truy cập
-                        .requestMatchers("/api/public/**").permitAll() // Các API công khai (dành cho khách hàng)
-                        .requestMatchers("/login", "/logout").permitAll() // Cho phép truy cập trang đăng nhập/đăng xuất
-                        .anyRequest().authenticated() // Các API khác yêu cầu đăng nhập
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/moderator/**").hasRole("MODERATOR")
+                        .requestMatchers("/api/public/**").permitAll()
+                        .requestMatchers("/login", "/logout").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginProcessingUrl("/login") // URL để xử lý đăng nhập
-                        .defaultSuccessUrl("/api/admin/users", true) // Chuyển hướng sau khi đăng nhập thành công
+                        .loginProcessingUrl("/login")
+                        .successHandler(authenticationSuccessHandler())
                         .permitAll()
                 )
                 .logout(logout -> logout
-                        .logoutUrl("/logout") // URL để đăng xuất
-                        .logoutSuccessUrl("/api/public/welcome") // Chuyển hướng sau khi đăng xuất
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/api/public/welcome")
                         .permitAll()
                 )
-                .csrf(csrf -> csrf.disable()); // Tạm thời tắt CSRF để dễ test
+                .csrf(csrf -> csrf.disable());
 
         return http.build();
     }
@@ -53,16 +54,31 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> {
-            // Tìm user trong database theo username
             User user = userRepository.findByUsername(username)
                     .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
-
-            // Lấy danh sách vai trò của user
             return org.springframework.security.core.userdetails.User
                     .withUsername(user.getUsername())
                     .password(user.getPassword())
                     .roles(user.getRoles().stream().map(Role::getName).toArray(String[]::new))
                     .build();
+        };
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return (request, response, authentication) -> {
+            boolean isAdmin = authentication.getAuthorities().stream()
+                    .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
+            boolean isModerator = authentication.getAuthorities().stream()
+                    .anyMatch(auth -> auth.getAuthority().equals("ROLE_MODERATOR"));
+
+            if (isAdmin) {
+                response.sendRedirect("/api/admin/users");
+            } else if (isModerator) {
+                response.sendRedirect("/api/moderator/products");
+            } else {
+                response.sendRedirect("/api/public/welcome");
+            }
         };
     }
 }
