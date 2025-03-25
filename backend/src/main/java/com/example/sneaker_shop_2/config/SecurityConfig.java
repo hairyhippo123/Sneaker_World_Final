@@ -27,6 +27,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/moderator/**").hasRole("MODERATOR")
+                        .requestMatchers("/api/customer/**").hasRole("CUSTOMER")
                         .requestMatchers("/api/public/**").permitAll()
                         .requestMatchers("/login", "/logout").permitAll()
                         .anyRequest().authenticated()
@@ -71,11 +72,15 @@ public class SecurityConfig {
                     .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
             boolean isModerator = authentication.getAuthorities().stream()
                     .anyMatch(auth -> auth.getAuthority().equals("ROLE_MODERATOR"));
+            boolean isUser = authentication.getAuthorities().stream()
+                    .anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER"));
 
             if (isAdmin) {
                 response.sendRedirect("/api/admin/users");
             } else if (isModerator) {
                 response.sendRedirect("/api/moderator/products");
+            } else if (isUser) {
+                response.sendRedirect("/api/customer/products");
             } else {
                 response.sendRedirect("/api/public/welcome");
             }
