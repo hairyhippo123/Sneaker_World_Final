@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import AdminWelcome from './components/AdminWelcome';
 import ModeratorWelcome from './components/ModeratorWelcome';
+import BrandDetail from './components/BrandDetail'; // Import component mới
 import './App.css';
 
 const App = () => {
@@ -42,6 +43,7 @@ const AppRoutes = () => {
                     user && user.role === 'MODERATOR' ? <ModeratorWelcome /> : <Navigate to="/login" />
                 }
             />
+            <Route path="/brand/:id" element={<BrandDetail />} /> {/* Thêm route mới */}
         </Routes>
     );
 };

@@ -174,27 +174,27 @@
 .brand-list {
   display: flex;
   gap: 20px;
-  justify-content: space-between; /* Phân bố đều các thẻ */
-  flex-wrap: wrap; /* Cho phép xuống dòng nếu cần */
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .brand-card {
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 224px; /* Chiều rộng mới để vừa vặn 1200px */
+  width: 224px;
   text-align: center;
   flex-shrink: 0;
+  padding: 0; /* Bỏ padding để hình ảnh lấp đầy */
 }
 
 .brand-card img {
   width: 100%;
-  height: 150px; /* Tăng chiều cao hình ảnh để cân đối */
+  height: 180px; /* Tăng chiều cao để lấp đầy không gian */
   object-fit: cover;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-radius: 10px; /* Bo góc toàn bộ hình ảnh */
   background-color: #e0e0e0;
-  margin: 0 auto;
+  margin: 0; /* Bỏ margin */
   display: block;
 }
 

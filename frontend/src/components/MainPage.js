@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { AuthContext } from '../context/AuthContext';
 import '../App.css';
 import Header from './Header';
@@ -9,17 +10,21 @@ import LouisVuitton from '../assets/images/LouisVuitton.jpg';
 import Supreme from '../assets/images/Supreme.jpg';
 import UGG from '../assets/images/UGG.jpg';
 import FOG from '../assets/images/fearofgodessentials.jpg';
+import AirJordan4RetroOG from '../assets/images/AirJordan4RetroOG.jpg'
+import AirJordan4RetroSBNavy from '../assets/images/AirJordan4RetroSBNavyProduct.jpg'
+import NikeAirMax1SWOOSHLowPolyBigHeadOrigins from '../assets/images/NikeAirMax1SWOOSHLowPolyBigHeadOrigins.jpg'
+import NikeTotal903SPMetallicSilverRed from '../assets/images/NikeTotal903SPMetallicSilverRed.jpg'
 
 const MainPage = () => {
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate(); // Khởi tạo useNavigate
 
     const sneakers = [
         { id: 1, name: 'Jordan 1 Retro High OG Bred', price: 272, image: AirJordan1RetroHigh85 },
-        { id: 2, name: 'Nike Air Foamposite One Galaxy', price: 197, image: AirJordan1RetroHigh85 },
-        { id: 3, name: 'Air Jordan 4 Retro OG SP Nigel', price: 291, image: AirJordan1RetroHigh85 },
-        { id: 4, name: 'Jordan 5 Retro OG Black Metallic', price: 229, image: AirJordan1RetroHigh85 },
-        { id: 5, name: 'Jordan 4 Retro SB Navy', price: 346, image: AirJordan1RetroHigh85 },
-        { id: 6, name: 'Jordan 12 Retro Flu Game', price: 247, image: AirJordan1RetroHigh85 },
+        { id: 2, name: 'AirJordan4RetroSBNavy', price: 197, image: AirJordan4RetroSBNavy },
+        { id: 3, name: 'Air Jordan 4 Retro OG SP Nigel', price: 291, image: AirJordan4RetroOG },
+        { id: 4, name: 'Nike Air Max1 SWOOSH Low Poly Big Head Origins', price: 346, image: NikeAirMax1SWOOSHLowPolyBigHeadOrigins },
+        { id: 5, name: 'Nike Total 903SP Metallic Silver Red', price: 247, image: NikeTotal903SPMetallicSilverRed },
     ];
 
     const recommendedSneakers = [
@@ -36,11 +41,15 @@ const MainPage = () => {
         { id: 5, name: 'UGG', image: UGG },
     ];
 
+    // Hàm xử lý khi bấm vào thương hiệu
+    const handleBrandClick = (brandId) => {
+        navigate(`/brand/${brandId}`); // Điều hướng đến trang chi tiết thương hiệu
+    };
+
     return (
         <div className="main-page">
             <Header />
 
-            {/* Container chính để giới hạn chiều rộng nội dung */}
             <div className="content-container">
                 {/* Banner */}
                 <section className="banner">
@@ -58,9 +67,14 @@ const MainPage = () => {
                     </div>
                     <div className="brand-list">
                         {popularBrands.map((brand) => (
-                            <div key={brand.id} className="brand-card">
+                            <div
+                                key={brand.id}
+                                className="brand-card"
+                                onClick={() => handleBrandClick(brand.id)} // Thêm sự kiện onClick
+                                style={{ cursor: 'pointer' }} // Thêm con trỏ để người dùng biết có thể bấm
+                            >
                                 <img src={brand.image} alt={brand.name} />
-                                <h3>{brand.name}</h3>
+                                {/* Bỏ thẻ h3 để không hiển thị tên thương hiệu */}
                             </div>
                         ))}
                     </div>
@@ -80,7 +94,7 @@ const MainPage = () => {
                     <div className="sneaker-list">
                         {(user && user.role === 'CUSTOMER' ? recommendedSneakers : sneakers).map((sneaker) => (
                             <div key={sneaker.id} className="sneaker-card">
-                                <div className="favorite-icon">❤️</div> {/* Thêm biểu tượng trái tim */}
+                                <div className="favorite-icon">❤️</div>
                                 <img src={sneaker.image} alt={sneaker.name} />
                                 <h3>{sneaker.name}</h3>
                                 <p>Lowest Ask: ${sneaker.price}</p>
