@@ -74,7 +74,6 @@ const MainPage = () => {
                                 style={{ cursor: 'pointer' }} // Thêm con trỏ để người dùng biết có thể bấm
                             >
                                 <img src={brand.image} alt={brand.name} />
-                                {/* Bỏ thẻ h3 để không hiển thị tên thương hiệu */}
                             </div>
                         ))}
                     </div>
