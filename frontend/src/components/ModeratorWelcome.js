@@ -1,43 +1,35 @@
-import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
-import { AuthContext } from '../context/AuthContext';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
+import '../App.css';
 
 const ModeratorWelcome = () => {
-    const [message, setMessage] = useState('');
-    const { user, logout } = useContext(AuthContext);
+    const { logout } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchWelcomeMessage = async () => {
-            try {
-                const response = await axios.get('http://localhost:8080/api/moderator/welcomemoderator', {
-                    withCredentials: true,
-                });
-                setMessage(response.data);
-            } catch (error) {
-                console.error('Error fetching welcome message:', error);
-                navigate('/login');
-            }
-        };
+    const handleLogout = () => {
+        logout();
+    };
 
-        if (user && user.role === 'MODERATOR') {
-            fetchWelcomeMessage();
-        } else {
-            navigate('/login');
-        }
-    }, [user, navigate]);
-
-    const handleLogout = async () => {
-        await logout();
-        navigate('/login');
+    const handleLogoClick = () => {
+        navigate('/'); // Chuyển hướng về MainPage
     };
 
     return (
-        <div style={{ textAlign: 'center', marginTop: '50px' }}>
-            <h2>Moderator Dashboard</h2>
-            <p>{message}</p>
-            <button onClick={handleLogout}>Logout</button>
+        <div className="dashboard-container">
+            <div className="dashboard-header">
+                <h1 className="logo" onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
+                    Sneaker World
+                </h1>
+            </div>
+            <h2>Trang quản trị Moderator</h2>
+            <p>Chào mừng Moderator! Bạn có thể quản lý sản phẩm, danh mục và đơn hàng.</p>
+            <div className="dashboard-actions">
+                <button className="action-button">Quản lý sản phẩm</button>
+                <button className="action-button">Quản lý danh mục</button>
+                <button className="action-button">Xem đơn hàng</button>
+            </div>
+            <button onClick={handleLogout} className="logout-button">Đăng xuất</button>
         </div>
     );
 };

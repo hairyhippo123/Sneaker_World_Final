@@ -1,39 +1,424 @@
-body {
+/* Main Page */
+.main-page {
   font-family: Arial, sans-serif;
 }
 
-h2 {
-  color: #333;
-}
-
-form {
-  display: inline-block;
-  margin-top: 20px;
-}
-
-form div {
-  margin-bottom: 15px;
-}
-
-label {
-  display: inline-block;
-  width: 100px;
-}
-
-input {
-  padding: 5px;
-  width: 200px;
-}
-
-button {
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-left .logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #28a745;
+}
+
+.header-center .search-bar {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 16px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: #28a745;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.login-button, .signup-button, .logout-button {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #0056b3;
+.login-button {
+  background-color: #fff;
+  border: 1px solid #333;
+  color: #333;
+}
+
+.login-button:hover {
+  background-color: #f0f0f0;
+}
+
+.signup-button {
+  background-color: #28a745;
+  border: none;
+  color: white;
+}
+
+.signup-button:hover {
+  background-color: #218838;
+}
+
+.logout-button {
+  background-color: #dc3545;
+  border: none;
+  color: white;
+}
+
+.logout-button:hover {
+  background-color: #c82333;
+}
+
+/* Banner */
+.banner {
+  background-color: #f8e1e1;
+  padding: 20px;
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner-content h2 {
+  font-size: 32px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.shop-now-button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.shop-now-button:hover {
+  background-color: #555;
+}
+
+/* Recommended Products */
+.recommended {
+  padding: 20px;
+}
+
+.recommended h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.sneaker-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.sneaker-card {
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  text-align: center;
+}
+
+.sneaker-card img {
+  width: 60%; /* Giảm kích thước hình ảnh xuống 80% chiều rộng của khung */
+  height: auto; /* Giữ tỷ lệ hình ảnh */
+  object-fit: contain; /* Đảm bảo hình ảnh không bị cắt, hiển thị toàn bộ */
+  border-radius: 5px;
+  margin: 0 auto; /* Căn giữa hình ảnh */
+  display: block; /* Đảm bảo margin auto hoạt động */
+}
+
+.sneaker-card h3 {
+  font-size: 16px;
+  color: #333;
+  margin: 10px 0;
+}
+
+.sneaker-card p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.xpress-ship {
+  display: inline-block;
+  font-size: 12px;
+  color: #28a745;
+  border: 1px solid #28a745;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+/* Welcome Message */
+.welcome-message {
+  padding: 20px;
+  text-align: center;
+  background-color: #f0f0f0;
+  margin: 20px 0;
+}
+
+.welcome-message h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.welcome-message p {
+  font-size: 16px;
+  color: #555;
+}
+/* Auth Container (Login & Signup) */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.auth-box {
+  background-color: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.auth-header .logo {
+  font-size: 32px;
+  font-weight: bold;
+  color: #28a745;
+}
+
+.auth-tabs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.tab {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+}
+
+.tab.active {
+  color: #333;
+  border-bottom: 2px solid #333;
+}
+
+.tab.inactive:hover {
+  color: #555;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.form-group input[type="checkbox"] {
+  width: auto;
+  margin-right: 10px;
+}
+
+.form-group label {
+  font-size: 14px;
+  color: #555;
+}
+
+.form-group .forgot-password {
+  display: block;
+  text-align: right;
+  font-size: 14px;
+  color: #007bff;
+  text-decoration: none;
+  margin-top: 5px;
+}
+
+.form-group .forgot-password:hover {
+  text-decoration: underline;
+}
+
+.form-group .password-hint {
+  font-size: 12px;
+  color: #999;
+  margin-top: 5px;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkbox-group label a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.checkbox-group label a:hover {
+  text-decoration: underline;
+}
+
+.error {
+  color: red;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.auth-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.auth-button:hover {
+  background-color: #555;
+}
+
+.terms {
+  font-size: 12px;
+  color: #999;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.terms a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.terms a:hover {
+  text-decoration: underline;
+}
+/* Dashboard Header (Admin & Moderator) */
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dashboard-header .logo {
+  font-size: 32px;
+  font-weight: bold;
+  color: #28a745;
+}
+/* Popular Brands */
+.popular-brands {
+  padding: 20px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-header h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+.see-all {
+  font-size: 16px;
+  color: #28a745;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.see-all:hover {
+  text-decoration: underline;
+}
+
+.brand-list {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.brand-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.brand-card img {
+  width: 100%; /* Giảm kích thước hình ảnh xuống 80% chiều rộng của khung */
+  height: auto; /* Giữ tỷ lệ hình ảnh */
+  object-fit: contain; /* Đảm bảo hình ảnh không bị cắt, hiển thị toàn bộ */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #e0e0e0;
+  margin: 0 auto; /* Căn giữa hình ảnh */
+  display: block; /* Đảm bảo margin auto hoạt động */
+}
+
+.brand-card h3 {
+  font-size: 16px;
+  color: #333;
+  margin: 10px 0;
+  padding: 0 10px;
 }

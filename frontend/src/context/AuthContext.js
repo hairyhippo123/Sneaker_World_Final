@@ -1,76 +1,37 @@
 import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null); // Lưu thông tin user (bao gồm vai trò)
+    const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
-    // Kiểm tra trạng thái đăng nhập khi ứng dụng khởi động
     useEffect(() => {
-        const checkAuth = async () => {
-            try {
-                // Gọi API để kiểm tra phiên (dùng JSESSIONID từ cookie)
-                const response = await axios.get('http://localhost:8080/api/homepage', {
-                    withCredentials: true, // Gửi cookie (JSESSIONID)
-                });
-                // Giả sử backend trả về thông tin user sau khi đăng nhập thành công
-                // Đây là bước bạn có thể gọi API để lấy thông tin user nếu backend hỗ trợ
-                setUser(null); // Ban đầu chưa đăng nhập
-            } catch (error) {
-                console.error('Error checking auth:', error);
-                setUser(null);
-            } finally {
-                setLoading(false);
-            }
-        };
-        checkAuth();
+        setUser(null);
+        setLoading(false);
     }, []);
 
-    // Hàm đăng nhập
-    const login = async (username, password) => {
-        try {
-            const response = await axios.post(
-                'http://localhost:8080/login',
-                new URLSearchParams({
-                    username: username,
-                    password: password,
-                }),
-                {
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    withCredentials: true, // Gửi và nhận cookie (JSESSIONID)
-                }
-            );
-
-            // Backend sẽ chuyển hướng và trả về Location header
-            const redirectUrl = response.headers.location;
-            if (redirectUrl) {
-                // Xác định vai trò dựa trên redirect URL
-                if (redirectUrl.includes('/api/admin/welcome-admin')) {
-                    setUser({ role: 'ADMIN' });
-                } else if (redirectUrl.includes('/api/moderator/welcome-moderator')) {
-                    setUser({ role: 'MODERATOR' });
-                } else if (redirectUrl.includes('/api/homepage')) {
-                    setUser({ role: 'CUSTOMER' });
-                }
-            }
-        } catch (error) {
-            console.error('Login failed:', error);
-            throw error;
+    const login = (username, password) => {
+        console.log('Đăng nhập với:', username, password);
+        if (username === 'admin') {
+            setUser({ role: 'ADMIN' });
+            navigate('/admin/welcome');
+        } else if (username === 'moderator') {
+            setUser({ role: 'MODERATOR' });
+            navigate('/moderator/welcome');
+        } else if (username === 'customer') {
+            setUser({ role: 'CUSTOMER' });
+            navigate('/'); // Chuyển hướng đến MainPage cho CUSTOMER
+        } else {
+            throw new Error('Tên đăng nhập hoặc mật khẩu không đúng!');
         }
     };
 
-    // Hàm đăng xuất
-    const logout = async () => {
-        try {
-            await axios.post('http://localhost:8080/logout', {}, { withCredentials: true });
-            setUser(null);
-        } catch (error) {
-            console.error('Logout failed:', error);
-        }
+    const logout = () => {
+        setUser(null);
+        navigate('/'); // Chuyển hướng về MainPage cho tất cả vai trò
     };
 
     return (
