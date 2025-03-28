@@ -20,9 +20,7 @@ const Login = () => {
         }
     };
 
-    const handleLogoClick = () => {
-        navigate('/'); // Chuyển hướng về MainPage
-    };
+    const handleLogoClick = () => navigate('/');
 
     return (
         <div className="auth-container">
@@ -38,22 +36,25 @@ const Login = () => {
                     </button>
                     <button className="tab active">Log In</button>
                 </div>
+                <h2 className="auth-title">Log In</h2>
                 <form onSubmit={handleLogin}>
                     <div className="form-group">
+                        <label>Email Address*</label>
                         <input
-                            type="text"
+                            type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Email Address*"
+                            placeholder="Enter your email"
                             required
                         />
                     </div>
                     <div className="form-group">
+                        <label>Password*</label>
                         <input
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Password*"
+                            placeholder="Enter your password"
                             required
                         />
                         <a href="#" className="forgot-password">Forgot Password?</a>
@@ -62,6 +63,9 @@ const Login = () => {
                     <button type="submit" className="auth-button">Log In</button>
                     <p className="terms">
                         By logging in, you agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+                    </p>
+                    <p className="switch-auth">
+                        Need an account? <a href="#" onClick={() => navigate('/signup')}>Sign Up</a>
                     </p>
                 </form>
             </div>

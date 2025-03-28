@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import '../App.css';
@@ -26,13 +26,14 @@ import TrandingNikeAirMax from '../assets/images/TrandingNikeAirMax.jpg';
 const MainPage = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
+    const [favorites, setFavorites] = useState({}); // Trạng thái favorite
 
     const sneakers = [
         { id: 1, name: 'Jordan 1 Retro High OG SP Union LA Chicago Shadow', price: 270, image: AirJordan1RetroHigh85, sold: 4976 },
         { id: 2, name: 'Air Jordan 4 Retro OG SP Nigel Sylvester Brick', price: 290, image: AirJordan4RetroOG, sold: 7888 },
-        { id: 3, name: 'Nike Air Max 1SWOOSH Low Poly Big Head Origins', price: 290, image: NikeAirMax1SWOOSHLowPolyBigHeadOrigins, sold: 7888 },
-        { id: 4, name: 'Jordan 4 Retro SB Navy', price: 338, image: AirJordan4RetroSBNavy, sold: 2953 },
-        { id: 5, name: 'Nike Total 90 3 SP Metallic Silver Black', price: 109, image: NikeTotal903SPMetallicSilverRed, sold: 1782 },
+        { id: 3, name: 'Jordan 4 Retro SB Navy', price: 338, image: AirJordan4RetroSBNavy, sold: 2953 },
+        { id: 4, name: 'Nike Total 90 3 SP Metallic Silver Black', price: 109, image: NikeTotal903SPMetallicSilverRed, sold: 1782 },
+        { id: 5, name: 'Nike Air Max 1SWOOSH Low Poly Big Head Origins', price: 109, image: NikeAirMax1SWOOSHLowPolyBigHeadOrigins, sold: 1782 },
     ];
 
     const popularBrands = [
@@ -43,25 +44,19 @@ const MainPage = () => {
         { id: 5, name: 'UGG', image: UGG },
     ];
 
-    const handleBrandClick = (brandId) => {
-        navigate(`/brand/${brandId}`);
-    };
-
-    const handleBannerClick = (path) => {
-        navigate(path);
-    };
-
+    const handleBrandClick = (brandId) => navigate(`/brand/${brandId}`);
+    const handleBannerClick = (path) => navigate(path);
     const handleScrollToAnchor = (anchor) => {
         const element = document.getElementById(anchor);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
+        if (element) element.scrollIntoView({ behavior: 'smooth' });
+    };
+    const toggleFavorite = (id) => {
+        setFavorites((prev) => ({ ...prev, [id]: !prev[id] }));
     };
 
     return (
         <div className="main-page">
             <Header />
-
             <div className="content-container">
                 {/* Banner Section */}
                 <section className="banner-section">
@@ -87,54 +82,16 @@ const MainPage = () => {
                 <section className="steals-deals" id="steals-deals">
                     <h2>Steals & Deals</h2>
                     <div className="deal-image-container">
-                        <div className="image-card">
-                            <img
-                                src={Tile1}
-                                alt="Steals & Deals"
-                                className="deal-image"
-                                onClick={() => handleScrollToAnchor('popular-brands')}
-                            />
-                        </div>
-                        <div className="image-card">
-                            <img
-                                src={Tile2}
-                                alt="Steals & Deals"
-                                className="deal-image"
-                                onClick={() => handleScrollToAnchor('popular-brands')}
-                            />
-                        </div>
-                        <div className="image-card">
-                            <img
-                                src={Tile4}
-                                alt="Steals & Deals"
-                                className="deal-image"
-                                onClick={() => handleScrollToAnchor('popular-brands')}
-                            />
-                        </div>
-                        <div className="image-card">
-                            <img
-                                src={Tile5}
-                                alt="Steals & Deals"
-                                className="deal-image"
-                                onClick={() => handleScrollToAnchor('popular-brands')}
-                            />
-                        </div>
-                        <div className="image-card">
-                            <img
-                                src={Tile6}
-                                alt="Steals & Deals"
-                                className="deal-image"
-                                onClick={() => handleScrollToAnchor('popular-brands')}
-                            />
-                        </div>
-                        <div className="image-card">
-                            <img
-                                src={Tile7}
-                                alt="Steals & Deals"
-                                className="deal-image"
-                                onClick={() => handleScrollToAnchor('popular-brands')}
-                            />
-                        </div>
+                        {[Tile1, Tile2, Tile4, Tile5, Tile6, Tile7].map((tile, index) => (
+                            <div key={index} className="image-card">
+                                <img
+                                    src={tile}
+                                    alt="Steals & Deals"
+                                    className="deal-image"
+                                    onClick={() => handleScrollToAnchor('popular-brands')}
+                                />
+                            </div>
+                        ))}
                     </div>
                 </section>
 
@@ -144,21 +101,21 @@ const MainPage = () => {
                         <h2>Popular Brands</h2>
                         <a href="#" className="see-all">See All →</a>
                     </div>
-                    <div className="brand-list">
+                    <div className="deal-image-container">
                         {popularBrands.map((brand) => (
                             <div
                                 key={brand.id}
-                                className="brand-card"
+                                className="image-card"
                                 onClick={() => handleBrandClick(brand.id)}
                                 style={{ cursor: 'pointer' }}
                             >
-                                <img src={brand.image} alt={brand.name} />
+                                <img src={brand.image} alt={brand.name} className="deal-image" />
                             </div>
                         ))}
                     </div>
                 </section>
 
-                {/* Welcome Message for Logged-in Customer */}
+                {/* Welcome Message */}
                 {user && user.role === 'CUSTOMER' && (
                     <section className="welcome-message">
                         <h2>Chào mừng bạn, Khách hàng!</h2>
@@ -176,7 +133,12 @@ const MainPage = () => {
                         {sneakers.map((sneaker) => (
                             <div key={sneaker.id} className="sneaker-card">
                                 <div className="sneaker-image">
-                                    <div className="favorite-icon">❤️</div>
+                                    <div
+                                        className={`favorite-icon ${favorites[sneaker.id] ? 'active' : ''}`}
+                                        onClick={() => toggleFavorite(sneaker.id)}
+                                    >
+                                        ❤️
+                                    </div>
                                     <img src={sneaker.image} alt={sneaker.name} />
                                 </div>
                                 <div className="sneaker-info">
@@ -189,7 +151,6 @@ const MainPage = () => {
                     </div>
                 </section>
             </div>
-
             <Footer />
         </div>
     );

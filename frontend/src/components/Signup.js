@@ -20,9 +20,7 @@ const Signup = () => {
         setError('Chức năng đăng ký chưa được triển khai!');
     };
 
-    const handleLogoClick = () => {
-        navigate('/'); // Chuyển hướng về MainPage
-    };
+    const handleLogoClick = () => navigate('/');
 
     return (
         <div className="auth-container">
@@ -38,40 +36,45 @@ const Signup = () => {
                         Log In
                     </button>
                 </div>
+                <h2 className="auth-title">Sign Up</h2>
                 <form onSubmit={handleSignup}>
                     <div className="form-group">
+                        <label>First Name*</label>
                         <input
                             type="text"
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
-                            placeholder="First Name*"
+                            placeholder="Enter your first name"
                             required
                         />
                     </div>
                     <div className="form-group">
+                        <label>Last Name*</label>
                         <input
                             type="text"
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
-                            placeholder="Last Name*"
+                            placeholder="Enter your last name"
                             required
                         />
                     </div>
                     <div className="form-group">
+                        <label>Email Address*</label>
                         <input
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Email Address*"
+                            placeholder="Enter your email"
                             required
                         />
                     </div>
                     <div className="form-group">
+                        <label>Password*</label>
                         <input
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Password*"
+                            placeholder="Enter your password"
                             required
                         />
                         <p className="password-hint">
@@ -90,6 +93,9 @@ const Signup = () => {
                     </div>
                     {error && <p className="error">{error}</p>}
                     <button type="submit" className="auth-button">Sign Up</button>
+                    <p className="switch-auth">
+                        Already have an account? <a href="#" onClick={() => navigate('/login')}>Log In</a>
+                    </p>
                 </form>
             </div>
         </div>
