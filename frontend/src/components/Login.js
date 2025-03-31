@@ -27,7 +27,7 @@ const Login = () => {
             <div className="auth-box">
                 <div className="auth-header">
                     <h1 className="logo" onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
-                        Sneaker World
+                        Seazyyy
                     </h1>
                 </div>
                 <div className="auth-tabs">
@@ -41,7 +41,7 @@ const Login = () => {
                     <div className="form-group">
                         <label>Email Address*</label>
                         <input
-                            type="email"
+                            type="text"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="Enter your email"

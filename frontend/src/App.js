@@ -8,7 +8,7 @@ import AdminWelcome from './components/AdminWelcome';
 import ModeratorWelcome from './components/ModeratorWelcome';
 import BrandDetail from './components/BrandDetail'; // Import component mới
 import './App.css';
-
+import SneakerDetail from './components/SneakerDetail'; // Import component mới
 const App = () => {
     return (
         <Router>
@@ -44,6 +44,7 @@ const AppRoutes = () => {
                 }
             />
             <Route path="/brand/:id" element={<BrandDetail />} /> {/* Thêm route mới */}
+            <Route path="/sneaker/:id" element={<SneakerDetail />} /> {/* Thêm route mới */}
         </Routes>
     );
 };

@@ -45,6 +45,7 @@ const MainPage = () => {
     ];
 
     const handleBrandClick = (brandId) => navigate(`/brand/${brandId}`);
+    const handleSneakerClick = (sneakerId) => navigate(`/sneaker/${sneakerId}`);
     const handleBannerClick = (path) => navigate(path);
     const handleScrollToAnchor = (anchor) => {
         const element = document.getElementById(anchor);
@@ -53,10 +54,21 @@ const MainPage = () => {
     const toggleFavorite = (id) => {
         setFavorites((prev) => ({ ...prev, [id]: !prev[id] }));
     };
-
+// Hàm điều hướng đến trang Moderator hoặc Admin
+    const handleRoleNavigation = () => {
+        if (user.role === 'MODERATOR') {
+            navigate('/moderator/welcome');
+        } else if (user.role === 'ADMIN') {
+            navigate('/admin/welcome');
+        }
+    };
     return (
         <div className="main-page">
-            <Header />
+            <Header
+                showRoleButton={user && (user.role === 'MODERATOR' || user.role === 'ADMIN')} // Truyền prop để hiển thị nút
+                role={user?.role} // Truyền role để hiển thị tên nút
+                onRoleClick={handleRoleNavigation} // Truyền hàm điều hướng
+            />
             <div className="content-container">
                 {/* Banner Section */}
                 <section className="banner-section">
@@ -131,11 +143,19 @@ const MainPage = () => {
                     </div>
                     <div className="sneaker-list">
                         {sneakers.map((sneaker) => (
-                            <div key={sneaker.id} className="sneaker-card">
+                            <div
+                                key={sneaker.id}
+                                className="sneaker-card"
+                                onClick={() => handleSneakerClick(sneaker.id)} // Thêm sự kiện onClick
+                                style={{ cursor: 'pointer' }}
+                            >
                                 <div className="sneaker-image">
                                     <div
                                         className={`favorite-icon ${favorites[sneaker.id] ? 'active' : ''}`}
-                                        onClick={() => toggleFavorite(sneaker.id)}
+                                        onClick={(e) => {
+                                            e.stopPropagation(); // Ngăn sự kiện click lan lên sneaker-card
+                                            toggleFavorite(sneaker.id);
+                                        }}
                                     >
                                         ❤️
                                     </div>
