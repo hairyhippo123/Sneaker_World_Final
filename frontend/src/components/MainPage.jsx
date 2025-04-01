@@ -112,8 +112,7 @@ const MainPage = () => {
                 {/* Popular Brands */}
                 <section className="popular-brands" id="popular-brands">
                     <div className="section-header">
-                        <h2>Popular Brands</h2>
-                        <a href="#" className="see-all">See All →</a>
+                        <h2>Brands</h2>
                     </div>
                     <div className="deal-image-container">
                         {popularBrands.map((brand) => (

@@ -8,7 +8,7 @@ const AdminWelcome = () => {
     const { logout } = useContext(AuthContext);
 
     return (
-        <div className="dashboard-container">
+        <div className="dashboard-container admin-dashboard">
             <Header />
             <h2>Trang quản trị Admin</h2>
             <p>Chào mừng Admin! Bạn có toàn quyền quản lý hệ thống.</p>

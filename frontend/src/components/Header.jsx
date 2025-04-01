@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import '../App.css';
 
-const Header = () => {
+const Header = ({ showRoleButton, role, onRoleClick }) => {
     const { user, logout } = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -33,34 +33,26 @@ const Header = () => {
                 </div>
                 <div className="header-right">
                     <div className="utility-links">
-                        <a href="#">News</a>
-                        <a href="#">About</a>
-                        <a href="#">Help</a>
-                        <a href="#">Sell</a>
-                    </div>
-                    <div className="auth-buttons">
                         {user ? (
                             <>
-                                <span>Xin chào, {user.role}</span>
-                                <button onClick={handleLogout} className="logout-button">
-                                    Đăng xuất
+                                {showRoleButton && (
+                                    <button className="role-button" onClick={onRoleClick}>
+                                        {role === 'MODERATOR' ? 'Moderator' : 'Admin'}
+                                    </button>
+                                )}
+                                <button className="logout-button" onClick={logout}>
+                                    Logout
                                 </button>
                             </>
                         ) : (
-                            <>
-                                <button
-                                    onClick={() => navigate('/login')}
-                                    className="login-button"
-                                >
-                                    Login
+                            <div className="auth-buttons">
+                                <button className="login-button" onClick={() => navigate('/login')}>
+                                    Log In
                                 </button>
-                                <button
-                                    onClick={() => navigate('/signup')}
-                                    className="signup-button"
-                                >
+                                <button className="signup-button" onClick={() => navigate('/signup')}>
                                     Sign Up
                                 </button>
-                            </>
+                            </div>
                         )}
                     </div>
                 </div>
