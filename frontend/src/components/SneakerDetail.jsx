@@ -3,11 +3,11 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import '../App.css';
-import AirJordan1RetroHigh85 from '../assets/images/TrendingSneakers/AirJordan1RetroHigh85.jpg';
-import AirJordan4RetroOG from '../assets/images/TrendingSneakers/AirJordan4RetroOG.jpg';
-import AirJordan4RetroSBNavy from '../assets/images/TrendingSneakers/AirJordan4RetroSBNavyProduct.jpg';
-import NikeAirMax1SWOOSHLowPolyBigHeadOrigins from '../assets/images/TrendingSneakers/NikeAirMax1SWOOSHLowPolyBigHeadOrigins.jpg';
-import NikeTotal903SPMetallicSilverRed from '../assets/images/TrendingSneakers/NikeTotal903SPMetallicSilverRed.jpg';
+import AirJordan1RetroHigh85 from '../assets/images/Sneakers/Air Jordan 1 Retro High 85.png';
+import AirJordan4RetroOG from '../assets/images/Sneakers/Air Jordan 4 Retro OG SP.png';
+import AirJordan4RetroSBNavy from '../assets/images/Sneakers/Jordan 4 Retro SB.png';
+import NikeAirMax1SWOOSHLowPolyBigHeadOrigins from '../assets/images/Sneakers/Nike Air Max 1.png';
+import NikeTotal903SPMetallicSilverRed from '../assets/images/Sneakers/Nike Total 90 3 SP.png';
 // Dữ liệu tĩnh (sẽ thay bằng API sau)
 const sneakersData = [
     { id: 1, name: 'Jordan 1 Retro High OG SP Union LA Chicago Shadow', price: 270, image: AirJordan1RetroHigh85, sold: 4976, description: 'A classic collaboration between Jordan and Union LA, featuring a Chicago Shadow colorway.' },
@@ -25,7 +25,10 @@ const SneakerDetail = () => {
     if (!sneaker) {
         return <div>Product not found</div>;
     }
-
+    const handleAddToCart = () => {
+        // Logic để thêm sản phẩm vào giỏ hàng (có thể lưu vào state hoặc localStorage)
+        console.log(`${sneaker.name} added to cart!`);
+    };
     return (
         <div className="main-page">
             <Header />
@@ -40,7 +43,12 @@ const SneakerDetail = () => {
                             <p className="price">Lowest Ask: ${sneaker.price}</p>
                             <p className="sold-info">{sneaker.sold} sold</p>
                             <p className="description">{sneaker.description}</p>
-                            <button className="buy-now-button">Buy Now</button>
+                            <div className="sneaker-detail-actions">
+                                <button className="add-to-cart-button" onClick={handleAddToCart}>
+                                    Add to Cart
+                                </button>
+                                <button className="buy-now-button">Buy Now</button>
+                            </div>
                         </div>
                     </div>
                 </section>

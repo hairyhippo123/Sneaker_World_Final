@@ -11,11 +11,11 @@ import Supreme from '../assets/images/Brand/Supreme.jpg';
 import UGG from '../assets/images/Brand/UGG.jpg';
 import FOG from '../assets/images/Brand/fearofgodessentials.jpg';
 //Products
-import AirJordan1RetroHigh85 from '../assets/images/TrendingSneakers/AirJordan1RetroHigh85.jpg';
-import AirJordan4RetroOG from '../assets/images/TrendingSneakers/AirJordan4RetroOG.jpg';
-import AirJordan4RetroSBNavy from '../assets/images/TrendingSneakers/AirJordan4RetroSBNavyProduct.jpg';
-import NikeAirMax1SWOOSHLowPolyBigHeadOrigins from '../assets/images/TrendingSneakers/NikeAirMax1SWOOSHLowPolyBigHeadOrigins.jpg';
-import NikeTotal903SPMetallicSilverRed from '../assets/images/TrendingSneakers/NikeTotal903SPMetallicSilverRed.jpg';
+import AirJordan1RetroHigh85 from '../assets/images/Sneakers/Air Jordan 1 Retro High 85.png';
+import AirJordan4RetroOG from '../assets/images/Sneakers/Air Jordan 4 Retro OG SP.png';
+import AirJordan4RetroSBNavy from '../assets/images/Sneakers/Jordan 4 Retro SB.png';
+import NikeAirMax1SWOOSHLowPolyBigHeadOrigins from '../assets/images/Sneakers/Nike Air Max 1.png';
+import NikeTotal903SPMetallicSilverRed from '../assets/images/Sneakers/Nike Total 90 3 SP.png';
 //Steal and Deals
 import Tile1 from '../assets/images/StealAndDeals/Copy_of_Brand_Tile_Template_(1).jpg';
 import Tile2 from '../assets/images/StealAndDeals/Copy_of_Brand_Tile_Template_(2).jpg';

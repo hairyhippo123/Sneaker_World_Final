@@ -707,6 +707,7 @@
 /* Sneaker Detail */
 .sneaker-detail {
   padding: var(--spacing) 0;
+  background-color: var(--dark-bg);
 }
 
 .sneaker-detail-container {
@@ -718,6 +719,9 @@
 
 .sneaker-detail-image {
   flex: 1;
+  background-color: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
 }
 
 .sneaker-detail-image img {
@@ -734,14 +738,15 @@
 
 .sneaker-detail-info h1 {
   font-size: 28px;
+  font-weight: 700;
   color: var(--white);
   margin-bottom: 10px;
 }
 
 .sneaker-detail-info .price {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
-  color: var(--primary-color);
+  color: var(--white);
   margin-bottom: 10px;
 }
 
@@ -755,21 +760,44 @@
   font-size: 16px;
   color: var(--white);
   margin-bottom: 20px;
+  line-height: 1.5;
 }
 
-.buy-now-button {
+/* Sneaker Detail Actions */
+.sneaker-detail-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.add-to-cart-button, .buy-now-button {
   padding: 12px 24px;
-  background-color: var(--primary-color);
-  color: var(--white);
   border: none;
   border-radius: var(--radius);
   font-size: 16px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.add-to-cart-button {
+  background-color: transparent;
+  color: var(--white);
+  border: 1px solid var(--white);
+}
+
+.add-to-cart-button:hover {
+  background-color: var(--gray-dark);
+  transform: translateY(-2px);
+}
+
+.buy-now-button {
+  background-color: var(--primary-color);
+  color: var(--white);
 }
 
 .buy-now-button:hover {
   background-color: #218838;
+  transform: translateY(-2px);
 }
 
 /* Responsive */
@@ -781,8 +809,16 @@
   .sneaker-detail-image img {
     height: 300px;
   }
-}
 
+  .sneaker-detail-actions {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .add-to-cart-button, .buy-now-button {
+    width: 100%;
+  }
+}
 /* Responsive */
 @media (max-width: 768px) {
   .header {
