@@ -177,6 +177,18 @@ const MainPage = () => {
                         ))}
                     </div>
                 </section>
+                {user && user.role === 'ADMIN' && (
+                    <section className="welcome-message">
+                        <h2>Chào mừng bạn, Admin!</h2>
+                        <p>Quản lý hệ thống và khám phá bộ sưu tập giày.</p>
+                    </section>
+                )}
+                {user && user.role === 'CUSTOMER' && (
+                    <section className="welcome-message">
+                        <h2>Chào mừng bạn, Khách hàng!</h2>
+                        <p>Khám phá các sản phẩm được cá nhân hóa dành riêng cho bạn.</p>
+                    </section>
+                )}
             </div>
             <Footer />
         </div>

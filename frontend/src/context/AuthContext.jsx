@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 export const AuthContext = createContext();
 
@@ -13,25 +14,27 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
     }, []);
 
-    const login = (username, password) => {
-        console.log('Đăng nhập với:', username, password);
-        if (username === 'admin') {
-            setUser({ role: 'ADMIN' });
-            navigate('/admin/welcome');
-        } else if (username === 'moderator') {
-            setUser({ role: 'MODERATOR' });
-            navigate('/moderator/welcome');
-        } else if (username === 'customer') {
-            setUser({ role: 'CUSTOMER' });
-            navigate('/'); // Chuyển hướng đến MainPage cho CUSTOMER
-        } else {
-            throw new Error('Tên đăng nhập hoặc mật khẩu không đúng!');
+    const login = async (username, password) => {
+        try {
+            const response = await axios.post('http://localhost:8080/login', {
+                username,
+                password
+            }, {
+                withCredentials: true // Gửi cookie JSESSIONID
+            });
+            // Giả sử server trả về vai trò trong response (tùy chỉnh nếu cần)
+            const role = username === 'admin' ? 'ADMIN' : 'CUSTOMER'; // Tạm thời hardcode
+            setUser({role});
+            navigate('/'); // Chuyển hướng đến MainPage
+        } catch (error) {
+            throw new Error('Đăng nhập thất bại! Vui lòng kiểm tra lại thông tin.');
         }
     };
 
-    const logout = () => {
+    const logout = async () => {
+        await axios.post('http://localhost:8080/logout', {}, {withCredentials: true});
         setUser(null);
-        navigate('/'); // Chuyển hướng về MainPage cho tất cả vai trò
+        navigate('/');
     };
 
     return (

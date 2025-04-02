@@ -13,7 +13,7 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            await login(email, password);
+            await login(email, password); // Gọi API đăng nhập
             setError('');
         } catch (err) {
             setError(err.message || 'Đăng nhập thất bại! Vui lòng thử lại.');
@@ -44,7 +44,7 @@ const Login = () => {
                             type="text"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Enter your email"
+                            placeholder="Enter your email or username"
                             required
                         />
                     </div>
