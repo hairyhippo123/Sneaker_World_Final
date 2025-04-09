@@ -1,7 +1,7 @@
 <div id="top" class="">
 
 <div align="center" class="text-center">
-<h1>SNEAKER_WORLD_FINAL</h1>
+<h1>SNEAKER_WORLD</h1>
 <p><em>Elevate Your Sneaker Shopping Experience Effortlessly</em></p>
 
 <img alt="last-commit" src="https://img.shields.io/github/last-commit/hairyhippo123/Sneaker_World_Final?style=flat&amp;logo=git&amp;logoColor=white&amp;color=0080ff" class="inline-block mx-1" style="margin: 0px 2px;">
