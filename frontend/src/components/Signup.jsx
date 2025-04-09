@@ -27,7 +27,7 @@ const Signup = () => {
             <div className="auth-box">
                 <div className="auth-header">
                     <h1 className="logo" onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
-                        Seazyyy
+                        Sneaker World
                     </h1>
                 </div>
                 <div className="auth-tabs">
