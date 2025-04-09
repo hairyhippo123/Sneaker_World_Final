@@ -3,10 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import '../App.css';
 
-const Header = ({showRoleButton, role, onRoleClick}) => {
+const Header = ({ showRoleButton, role, onRoleClick }) => {
     const { user, logout } = useContext(AuthContext);
     const navigate = useNavigate();
-
 
     const handleLogout = () => {
         logout();
@@ -22,7 +21,7 @@ const Header = ({showRoleButton, role, onRoleClick}) => {
             <header className="header">
                 <div className="header-left">
                     <h1 className="logo" onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
-                        Sneazyyy
+                        Sneaker World
                     </h1>
                 </div>
                 <div className="header-center">

@@ -4,24 +4,28 @@ import { AuthContext } from '../context/AuthContext';
 import '../App.css';
 import Header from './Header';
 import Footer from './Footer';
-import AirJordan1RetroHigh85 from '../assets/images/AirJordan1RetroHigh85.jpg';
-import Jordan from '../assets/images/Jordan.jpg';
-import LouisVuitton from '../assets/images/LouisVuitton.jpg';
-import Supreme from '../assets/images/Supreme.jpg';
-import UGG from '../assets/images/UGG.jpg';
-import FOG from '../assets/images/fearofgodessentials.jpg';
-import AirJordan4RetroOG from '../assets/images/AirJordan4RetroOG.jpg';
-import AirJordan4RetroSBNavy from '../assets/images/AirJordan4RetroSBNavyProduct.jpg';
-import NikeAirMax1SWOOSHLowPolyBigHeadOrigins from '../assets/images/NikeAirMax1SWOOSHLowPolyBigHeadOrigins.jpg';
-import NikeTotal903SPMetallicSilverRed from '../assets/images/NikeTotal903SPMetallicSilverRed.jpg';
-import CherryBlossom from '../assets/images/CherryBlossom.jpg';
+//Brand
+import Jordan from '../assets/images/Brand/Jordan.jpg';
+import LouisVuitton from '../assets/images/Brand/LouisVuitton.jpg';
+import Supreme from '../assets/images/Brand/Supreme.jpg';
+import UGG from '../assets/images/Brand/UGG.jpg';
+import FOG from '../assets/images/Brand/fearofgodessentials.jpg';
+//Products
+import AirJordan1RetroHigh85 from '../assets/images/Sneakers/Air Jordan 1 Retro High 85.png';
+import AirJordan4RetroOG from '../assets/images/Sneakers/Air Jordan 4 Retro OG SP.png';
+import AirJordan4RetroSBNavy from '../assets/images/Sneakers/Jordan 4 Retro SB.png';
+import NikeAirMax1SWOOSHLowPolyBigHeadOrigins from '../assets/images/Sneakers/Nike Air Max 1.png';
+import NikeTotal903SPMetallicSilverRed from '../assets/images/Sneakers/Nike Total 90 3 SP.png';
+//Steal and Deals
 import Tile1 from '../assets/images/StealAndDeals/Copy_of_Brand_Tile_Template_(1).jpg';
 import Tile2 from '../assets/images/StealAndDeals/Copy_of_Brand_Tile_Template_(2).jpg';
 import Tile4 from '../assets/images/StealAndDeals/Copy_of_Brand_Tile_Template_(4).jpg';
 import Tile5 from '../assets/images/StealAndDeals/Copy_of_Brand_Tile_Template_(5).jpg';
 import Tile6 from '../assets/images/StealAndDeals/Copy_of_Brand_Tile_Template_(6).jpg';
 import Tile7 from '../assets/images/StealAndDeals/Copy_of_Brand_Tile_Template_(7).jpg';
-import TrandingNikeAirMax from '../assets/images/TrandingNikeAirMax.jpg';
+//Banner
+import TrendingNikeAirMax from '../assets/images/banner/TrendingNikeAirMax.jpg';
+import CherryBlossom from '../assets/images/banner/CherryBlossom.jpg';
 
 const MainPage = () => {
     const { user } = useContext(AuthContext);
@@ -46,7 +50,6 @@ const MainPage = () => {
 
     const handleBrandClick = (brandId) => navigate(`/brand/${brandId}`);
     const handleSneakerClick = (sneakerId) => navigate(`/sneaker/${sneakerId}`);
-    const handleBannerClick = (path) => navigate(path);
     const handleScrollToAnchor = (anchor) => {
         const element = document.getElementById(anchor);
         if (element) element.scrollIntoView({ behavior: 'smooth' });
@@ -54,7 +57,7 @@ const MainPage = () => {
     const toggleFavorite = (id) => {
         setFavorites((prev) => ({ ...prev, [id]: !prev[id] }));
     };
-// Hàm điều hướng đến trang Moderator hoặc Admin
+
     const handleRoleNavigation = () => {
         if (user.role === 'MODERATOR') {
             navigate('/moderator/welcome');
@@ -62,12 +65,13 @@ const MainPage = () => {
             navigate('/admin/welcome');
         }
     };
+
     return (
         <div className="main-page">
             <Header
-                showRoleButton={user && (user.role === 'MODERATOR' || user.role === 'ADMIN')} // Truyền prop để hiển thị nút
-                role={user?.role} // Truyền role để hiển thị tên nút
-                onRoleClick={handleRoleNavigation} // Truyền hàm điều hướng
+                showRoleButton={user && (user.role === 'MODERATOR' || user.role === 'ADMIN')}
+                role={user?.role}
+                onRoleClick={handleRoleNavigation}
             />
             <div className="content-container">
                 {/* Banner Section */}
@@ -77,15 +81,13 @@ const MainPage = () => {
                             src={CherryBlossom}
                             alt="Louis Vuitton x Murakami Cherry Blossom"
                             className="banner-large-image"
-                            onClick={() => handleBannerClick('/louis-vuitton-murakami')}
                         />
                     </div>
                     <div className="banner-small">
                         <img
-                            src={TrandingNikeAirMax}
+                            src={TrendingNikeAirMax}
                             alt="Nike Air Max 1 SWOOSH"
                             className="banner-small-image"
-                            onClick={() => handleBannerClick('/nike-air-max')}
                         />
                     </div>
                 </section>
@@ -110,8 +112,7 @@ const MainPage = () => {
                 {/* Popular Brands */}
                 <section className="popular-brands" id="popular-brands">
                     <div className="section-header">
-                        <h2>Popular Brands</h2>
-                        <a href="#" className="see-all">See All →</a>
+                        <h2>Brands</h2>
                     </div>
                     <div className="deal-image-container">
                         {popularBrands.map((brand) => (
@@ -139,21 +140,27 @@ const MainPage = () => {
                 <section className="trending-sneakers">
                     <div className="section-header">
                         <h2>Trending Sneakers</h2>
-                        <a href="#" className="see-all">See All →</a>
+                        <a
+                            className="see-all"
+                            onClick={() => navigate('/all-sneakers')} // Điều hướng đến trang AllSneakers
+                            style={{ cursor: 'pointer' }}
+                        >
+                            See All →
+                        </a>
                     </div>
                     <div className="sneaker-list">
                         {sneakers.map((sneaker) => (
                             <div
                                 key={sneaker.id}
                                 className="sneaker-card"
-                                onClick={() => handleSneakerClick(sneaker.id)} // Thêm sự kiện onClick
+                                onClick={() => handleSneakerClick(sneaker.id)}
                                 style={{ cursor: 'pointer' }}
                             >
                                 <div className="sneaker-image">
                                     <div
                                         className={`favorite-icon ${favorites[sneaker.id] ? 'active' : ''}`}
                                         onClick={(e) => {
-                                            e.stopPropagation(); // Ngăn sự kiện click lan lên sneaker-card
+                                            e.stopPropagation();
                                             toggleFavorite(sneaker.id);
                                         }}
                                     >
@@ -170,6 +177,18 @@ const MainPage = () => {
                         ))}
                     </div>
                 </section>
+                {user && user.role === 'ADMIN' && (
+                    <section className="welcome-message">
+                        <h2>Chào mừng bạn, Admin!</h2>
+                        <p>Quản lý hệ thống và khám phá bộ sưu tập giày.</p>
+                    </section>
+                )}
+                {user && user.role === 'CUSTOMER' && (
+                    <section className="welcome-message">
+                        <h2>Chào mừng bạn, Khách hàng!</h2>
+                        <p>Khám phá các sản phẩm được cá nhân hóa dành riêng cho bạn.</p>
+                    </section>
+                )}
             </div>
             <Footer />
         </div>

@@ -8,7 +8,7 @@ const ModeratorWelcome = () => {
     const { logout } = useContext(AuthContext);
 
     return (
-        <div className="dashboard-container">
+        <div className="dashboard-container moderator-dashboard">
             <Header />
             <h2>Trang quản trị Moderator</h2>
             <p>Chào mừng Moderator! Bạn có thể quản lý sản phẩm, danh mục và đơn hàng.</p>

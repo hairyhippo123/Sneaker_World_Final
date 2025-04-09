@@ -39,7 +39,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/customer/**").hasRole("CUSTOMER")
                         .requestMatchers("/api/public/**").permitAll()
                         .requestMatchers("/login", "/logout").permitAll()
-                        .requestMatchers("/api/home-page").hasRole("CUSTOMER")
+                        .requestMatchers("/api/home-page").hasAnyRole("CUSTOMER","ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
